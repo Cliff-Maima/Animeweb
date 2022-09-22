@@ -3,14 +3,22 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <script src="https://unpkg.com/wavesurfer.js"></script>
     </head>
 <title>Animatedgraphics</title>
 <body>
     <div class="hero">
+        <div class="music">
+            <p>Artist: TION WAYNE</p>
+            <h1>Who Else</h1>
+            <div class="track">
+                <img src="images/play.png" id="playBtn">
+                <div id="waveform"></div>
+            </div>
+        </div>
         <nav><img src="images/logo.png" class="logo">
 
             <ul>
-
                 <li><a href="">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Services</a></li>
@@ -19,11 +27,33 @@
         </nav>
         <h1 class="title">AMC.company</h1>
     </div>
-    <video autoplay muted loop id="myVideo">
-        <source src="images/video.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
+    <script>
+        var playBtn= document.getElementById("playBtn");
+        var wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: '#ddd',
+    progressColor: '#ff006c',
+    barWidth: 4,
+    responsive: true,
+    height: 90,
+    barRadius: 4
+});
 
+wavesurfer.load('images/y2mate.com - Tion Wayne  Who Else feat Unknown T Official video.mp3');
+
+playBtn.onclick= function(){
+    wavesurfer.playPause();
+    if(playBtn.src.includes("play.png")){
+        playBtn.src= "images/pause.png";
+    }else{
+        playBtn.src= "images/play.png";
+    }
+}
+wavesurfer.on('finish', function(){
+    playBtn.src= "images/pause.png";
+    wavesurfer.stop()
+})
+    </script>
 
 
 </body>
